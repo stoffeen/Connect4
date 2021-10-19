@@ -27,11 +27,31 @@ public class Board {
                 for(int winRow = row + 1; winRow < rows; winRow++) {
                     if(ourBoard[winRow][col].getColor() == winningColor) {
                         winningStreak--;
+                        if(winningStreak == 0) {
+                            someoneWon = true;
+                        }
                     } else {
                         winningStreak = 3;
                     }
                 }
+                //for any other type of check, it needs to be 4
+                winningStreak = 4;
 
+                // look at the horizontal
+                for(int winCol = col - 3; winCol < col + 3; winCol++) {
+                    if(winCol < 0) continue;
+                    if(winCol >= columns) break;
+
+                    if(ourBoard[row][winCol] != null && ourBoard[row][winCol].getColor() == winningColor) {
+                        winningStreak--;
+                        if(winningStreak == 0) {
+                            someoneWon = true;
+                        }
+                    } else {
+                        winningStreak = 3;
+                    }
+                }
+                break;
             }
         }
 

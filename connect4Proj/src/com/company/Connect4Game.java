@@ -22,7 +22,14 @@ public class Connect4Game {
     }
 
     public boolean checkForWinner(int column) {
-        String winningColor = is1Playing ? color1 : color2;
+        String winningColor;
+
+        if(is1Playing) {
+            winningColor = color1;
+        } else {
+            winningColor = color2;
+        }
+
 
         return board.checkForWinner(column, winningColor);
     }
@@ -36,10 +43,10 @@ public class Connect4Game {
             String color;
             if(is1Playing) {
                 color = color1;
-                System.out.println("Spelare 1's tur");
+                System.out.println("Spelare 1(Röd) tur");
             } else {
                 color = color2;
-                System.out.println("Spelare 2's tur");
+                System.out.println("Spelare 2(Gul) tur");
             }
 
             System.out.println("Var god välj vilken kolumn du vill lägga ditt mynt i.");
@@ -50,13 +57,15 @@ public class Connect4Game {
 
             boolean succes = board.addPiece(column, color);
 
+            // check for winner
             if(succes) {
                 if(checkForWinner(column)) {
+                    board.printBoard();
                     running = false;
                     if(is1Playing) {
-                        System.out.println("Spelare 1 vann!");
+                        System.out.println("Spelare 1 (Röd) vann!");
                     } else {
-                        System.out.println("Spelare 2 vann!");
+                        System.out.println("Spelare 2 (Gul) vann!");
                     }
                 }
                 is1Playing = !is1Playing;
