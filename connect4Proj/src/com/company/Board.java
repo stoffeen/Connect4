@@ -2,15 +2,47 @@ package com.company;
 
 public class Board {
 
-    private static int rows = 6;
-    private static int columns = 7;
+    private static final int rows = 6;
+    private static final int columns = 7;
 
     Piece [][]ourBoard = new Piece[rows][columns];
+
+    public static int getColumns() {
+        return columns;
+    }
+
+    public static int getRows() {
+        return rows;
+    }
+
+    public boolean checkForWinner(int col, String winningColor) {
+        boolean someoneWon = false;
+
+        for(int row = 0; row < rows; row++) {
+            if(ourBoard[row][col] != null) {
+                // if this reaches 0, we have won
+                int winningStreak = 3;
+
+                // check downwards
+                for(int winRow = row + 1; winRow < rows; winRow++) {
+                    if(ourBoard[winRow][col].getColor() == winningColor) {
+                        winningStreak--;
+                    } else {
+                        winningStreak = 3;
+                    }
+                }
+
+            }
+        }
+
+        return someoneWon;
+
+    }
 
     public boolean addPiece(int colToAdd, String color) {
         // within normal range
         if(colToAdd >= 0 && colToAdd < columns) {
-            if(ourBoard[colToAdd][0] == null){
+            if(ourBoard[0][colToAdd] == null){
                 boolean addedThePiece = false;
                 for(int row = rows - 1; row >= 0; row--) {
                     if(ourBoard[row][colToAdd] == null) {
@@ -23,7 +55,7 @@ public class Board {
                 return addedThePiece;
             } else {
                 // that row is full
-                System.out.println("Denna kolumn är full, var god välj en annan rad.");
+                System.err.println("Denna kolumn är full, var god välj en annan rad.");
                 return false;
             }
         } else {
@@ -61,6 +93,4 @@ public class Board {
             }
         }
     }
-
-
 }
