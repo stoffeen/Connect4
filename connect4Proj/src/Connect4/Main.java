@@ -1,4 +1,4 @@
-package com.company;
+package Connect4;
 
 public class Main {
 
