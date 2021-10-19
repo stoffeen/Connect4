@@ -48,7 +48,7 @@ public class Board {
                             someoneWon = true;
                         }
                     } else {
-                        winningStreak = 3;
+                        winningStreak = 4;
                     }
                 }
                 break;
