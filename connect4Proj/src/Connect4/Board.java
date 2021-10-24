@@ -38,7 +38,7 @@ public class Board {
                 winningStreak = 4;
 
                 // look at the horizontal
-                for(int winCol = col - 3; winCol < col + 3; winCol++) {
+                for(int winCol = col - 3; winCol <= col + 3; winCol++) {
                     if(winCol < 0) continue;
                     if(winCol >= columns) break;
 
@@ -51,6 +51,40 @@ public class Board {
                         winningStreak = 4;
                     }
                 }
+                winningStreak = 4;
+
+                // look at the left diagonal
+                for(int winRow = row - 3, winCol = col -3; winRow <= row + 3 && winCol <= col + 3; winRow++, winCol++) {
+                    if(winRow < 0 || winCol < 0) continue;
+                    if(winRow >= rows  || winCol >= columns) break;
+
+                    if(ourBoard[winRow][winCol] != null && ourBoard[winRow][winCol].getColor() == winningColor) {
+                        winningStreak--;
+                        if(winningStreak == 0) {
+                            someoneWon = true;
+                        }
+                    } else {
+                        winningStreak = 4;
+                    }
+                }
+
+                winningStreak = 4;
+
+                // look at the right diagonal
+                for(int winRow = row - 3, winCol = col +3; winRow <= row + 3 && winCol >= col - 3; winRow++, winCol--) {
+                    if(winRow < 0 || winCol >= columns) continue;
+                    if(winRow >= rows  || winCol < 0) break;
+
+                    if(ourBoard[winRow][winCol] != null && ourBoard[winRow][winCol].getColor() == winningColor) {
+                        winningStreak--;
+                        if(winningStreak == 0) {
+                            someoneWon = true;
+                        }
+                    } else {
+                        winningStreak = 4;
+                    }
+                }
+
                 break;
             }
         }
@@ -80,7 +114,7 @@ public class Board {
             }
         } else {
             // outside normal range
-            System.out.println("Du kan ej lägga ditt mynt på denna plats.");
+            System.err.println("Du kan ej lägga ditt mynt på denna plats.");
             return false;
         }
     }
