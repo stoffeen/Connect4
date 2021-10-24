@@ -30,8 +30,12 @@ public class Connect4Game {
             winningColor = color2;
         }
 
-
         return board.checkForWinner(column, winningColor);
+    }
+
+    public void reset() {
+        this.board = new Board();
+        is1Playing = (new Random()).nextBoolean();
     }
 
     public void startGame() {
@@ -61,11 +65,20 @@ public class Connect4Game {
             if(succes) {
                 if(checkForWinner(column)) {
                     board.printBoard();
-                    running = false;
                     if(is1Playing) {
                         System.out.println("Spelare 1 (Röd) vann!");
                     } else {
                         System.out.println("Spelare 2 (Gul) vann!");
+                    }
+                    // Reset, asking if you want to play again
+                    System.out.println("Vill du spela igen?");
+                    System.out.println("Tryck J för Ja, N för Nej: ");
+                    Scanner input2 = new Scanner(System.in);
+                    String playAgain = input2.nextLine();
+                    if(playAgain.toLowerCase().equals("j")) {
+                        reset();
+                    } else {
+                        running = false;
                     }
                 }
                 is1Playing = !is1Playing;
