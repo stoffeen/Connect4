@@ -12,7 +12,7 @@ public class Connect4Game {
     // false if player2's turn
     private boolean is1Playing;
 
-    // color for players
+    // color for the players
     public Connect4Game(String color1, String color2) {
         board = new Board();
         this.color1 = color1;
@@ -54,7 +54,7 @@ public class Connect4Game {
             }
 
             System.out.println("Välj en kolumn som du vill lägga ditt mynt i.");
-            System.out.println("Välj mellan 1 och " + board.getColumns() + ": ");
+            System.out.println("Välj mellan 1 och " + Board.getColumns() + ": ");
 
             Scanner input = new Scanner(System.in);
             int column = input.nextInt() - 1;
@@ -75,7 +75,7 @@ public class Connect4Game {
                     System.out.println("Tryck J för Ja, N för Nej: ");
                     Scanner input2 = new Scanner(System.in);
                     String playAgain = input2.nextLine();
-                    if(playAgain.toLowerCase().equals("j")) {
+                    if(playAgain.equalsIgnoreCase("j")) {
                         reset();
                     } else {
                         running = false;
