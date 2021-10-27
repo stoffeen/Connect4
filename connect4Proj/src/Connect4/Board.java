@@ -15,9 +15,34 @@ public class Board {
         return rows;
     }
 
-    public boolean checkForWinner(int col, String winningColor) {
-        boolean someoneWon = false;
+    private boolean checkDiagonal(int row, int col, String winningColor, boolean rightDiagonal) {
+        int winningStreak = 4;
+        int reverser = 1;
 
+        if(rightDiagonal) reverser = -1;
+
+        // look at the diagonal
+        for(int winRow = row - 3, winCol = col - (3 * reverser); winRow <= row + 3; winRow++, winCol += reverser) {
+            if(!rightDiagonal) {
+                if (winRow < 0 || winCol < 0) continue;
+                if (winRow >= rows || winCol >= columns) break;
+            } else {
+                if(winRow < 0 || winCol >= columns) continue;
+                if(winRow >= rows  || winCol < 0) break;
+            }
+            if(ourBoard[winRow][winCol] != null && ourBoard[winRow][winCol].getColor().equals(winningColor)) {
+                winningStreak--;
+                if(winningStreak == 0) {
+                    return true;
+                }
+            } else {
+                winningStreak = 4;
+            }
+        }
+        return false;
+    }
+
+    public boolean checkForWinner(int col, String winningColor) {
         for(int row = 0; row < rows; row++) {
             if(ourBoard[row][col] != null) {
                 // if this reaches 0, we have won
@@ -28,12 +53,13 @@ public class Board {
                     if(ourBoard[winRow][col].getColor().equals(winningColor)) {
                         winningStreak--;
                         if(winningStreak == 0) {
-                            someoneWon = true;
+                            return true;
                         }
                     } else {
                         winningStreak = 3;
                     }
                 }
+
                 //for any other type of check, it needs to be 4
                 winningStreak = 4;
 
@@ -45,51 +71,23 @@ public class Board {
                     if(ourBoard[row][winCol] != null && ourBoard[row][winCol].getColor().equals(winningColor)) {
                         winningStreak--;
                         if(winningStreak == 0) {
-                            someoneWon = true;
-                        }
-                    } else {
-                        winningStreak = 4;
-                    }
-                }
-                winningStreak = 4;
-
-                // look at the left diagonal
-                for(int winRow = row - 3, winCol = col -3; winRow <= row + 3 && winCol <= col + 3; winRow++, winCol++) {
-                    if(winRow < 0 || winCol < 0) continue;
-                    if(winRow >= rows  || winCol >= columns) break;
-
-                    if(ourBoard[winRow][winCol] != null && ourBoard[winRow][winCol].getColor().equals(winningColor)) {
-                        winningStreak--;
-                        if(winningStreak == 0) {
-                            someoneWon = true;
+                            return true;
                         }
                     } else {
                         winningStreak = 4;
                     }
                 }
 
-                winningStreak = 4;
-
-                // look at the right diagonal
-                for(int winRow = row - 3, winCol = col +3; winRow <= row + 3 && winCol >= col - 3; winRow++, winCol--) {
-                    if(winRow < 0 || winCol >= columns) continue;
-                    if(winRow >= rows  || winCol < 0) break;
-
-                    if(ourBoard[winRow][winCol] != null && ourBoard[winRow][winCol].getColor().equals(winningColor)) {
-                        winningStreak--;
-                        if(winningStreak == 0) {
-                            someoneWon = true;
-                        }
-                    } else {
-                        winningStreak = 4;
-                    }
-                }
+                // check left diagonal
+                if(checkDiagonal(row, col, winningColor, false)) return true;
+                // check right diagonal
+                if(checkDiagonal(row, col, winningColor, true)) return true;
 
                 break;
             }
         }
 
-        return someoneWon;
+        return false;
 
     }
 
