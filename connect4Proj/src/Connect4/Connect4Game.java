@@ -53,7 +53,7 @@ public class Connect4Game {
                 System.out.println("Spelare 2(Gul) tur");
             }
 
-            System.out.println("Var god välj vilken kolumn du vill lägga ditt mynt i.");
+            System.out.println("Välj en kolumn som du vill lägga ditt mynt i.");
             System.out.println("Välj mellan 1 och " + board.getColumns() + ": ");
 
             Scanner input = new Scanner(System.in);
