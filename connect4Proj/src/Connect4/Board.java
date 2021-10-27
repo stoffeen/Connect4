@@ -83,7 +83,7 @@ public class Board {
                 // check right diagonal
                 if(checkDiagonal(row, col, winningColor, true)) return true;
 
-                break;
+                return false;
             }
         }
 
@@ -119,7 +119,7 @@ public class Board {
 
     // Building the board
     public void printBoard() {
-        for(int col = 0; col < columns + 2; col++) System.out.print("-");
+        for(int col = 0; col < columns + 8; col++) System.out.print("-");
         System.out.println();
         for(int row = 0; row < rows; row++) {
             System.out.print("|");
@@ -133,7 +133,7 @@ public class Board {
             }
             System.out.println();
         }
-        for(int col = 0; col < columns + 2; col++) System.out.print("-");
+        for(int col = 0; col < columns + 8; col++) System.out.print("-");
         System.out.println();
     }
 
