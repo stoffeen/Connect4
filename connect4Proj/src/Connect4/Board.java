@@ -11,10 +11,6 @@ public class Board {
         return columns;
     }
 
-    public static int getRows() {
-        return rows;
-    }
-
     private boolean checkDiagonal(int row, int col, String winningColor, boolean rightDiagonal) {
         int winningStreak = 4;
         int reverser = 1;
@@ -31,13 +27,8 @@ public class Board {
                 if(winRow >= rows  || winCol < 0) break;
             }
             if(ourBoard[winRow][winCol] != null && ourBoard[winRow][winCol].getColor().equals(winningColor)) {
-                winningStreak--;
-                if(winningStreak == 0) {
-                    return true;
-                }
-            } else {
-                winningStreak = 4;
-            }
+                if (--winningStreak == 0) return true;
+            } else winningStreak = 4;
         }
         return false;
     }
@@ -52,17 +43,11 @@ public class Board {
                 for(int winRow = row + 1; winRow < rows; winRow++) {
                     if(ourBoard[winRow][col].getColor().equals(winningColor)) {
                         winningStreak--;
-                        if(winningStreak == 0) {
-                            return true;
-                        }
-                    } else {
-                        winningStreak = 3;
-                    }
+                        if(winningStreak == 0) return true;
+                    } else winningStreak = 3;
                 }
 
-                //for any other type of check, it needs to be 4
                 winningStreak = 4;
-
                 // look at the horizontal
                 for(int winCol = col - 3; winCol <= col + 3; winCol++) {
                     if(winCol < 0) continue;
@@ -70,12 +55,8 @@ public class Board {
 
                     if(ourBoard[row][winCol] != null && ourBoard[row][winCol].getColor().equals(winningColor)) {
                         winningStreak--;
-                        if(winningStreak == 0) {
-                            return true;
-                        }
-                    } else {
-                        winningStreak = 4;
-                    }
+                        if(winningStreak == 0) return true;
+                    } else winningStreak = 4;
                 }
 
                 // check left diagonal
@@ -86,7 +67,6 @@ public class Board {
                 return false;
             }
         }
-
         return false;
 
     }
@@ -96,14 +76,13 @@ public class Board {
         if(colToAdd >= 0 && colToAdd < columns) {
             if(ourBoard[0][colToAdd] == null){
                 boolean addedThePiece = false;
-                for(int row = rows - 1; row >= 0; row--) {
+                for(int row = rows - 1; row >= 0; row--)
                     if(ourBoard[row][colToAdd] == null) {
                         ourBoard[row][colToAdd] = new Piece();
                         ourBoard[row][colToAdd].setColor(color);
                         addedThePiece = true;
                         break;
                     }
-                }
                 return addedThePiece;
             } else {
                 // that row is full
@@ -124,11 +103,8 @@ public class Board {
         for(int row = 0; row < rows; row++) {
             System.out.print("|");
             for(int col = 0; col < columns; col++) {
-                if (ourBoard[row][col] == null) {
-                    System.out.print("_");
-                } else {
-                    System.out.print(ourBoard[row][col].getColor());
-                }
+                if (ourBoard[row][col] == null) System.out.print("_");
+                else System.out.print(ourBoard[row][col].getColor());
                 System.out.print("|");
             }
             System.out.println();
@@ -137,12 +113,8 @@ public class Board {
         System.out.println();
     }
 
-
     public Board() {
-        for(int row = 0; row < rows; row++) {
-            for(int col = 0; col < columns; col++) {
-                ourBoard[row][col] = null;
-            }
-        }
+        for(int row = 0; row < rows; row++)
+            for(int col = 0; col < columns; col++) ourBoard[row][col] = null;
     }
 }

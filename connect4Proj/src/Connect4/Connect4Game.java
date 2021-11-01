@@ -47,10 +47,10 @@ public class Connect4Game {
             String color;
             if(is1Playing) {
                 color = color1;
-                System.out.println("Spelare 1(Röd) tur");
+                System.out.println("Spelare 1(Röd) tur ");
             } else {
                 color = color2;
-                System.out.println("Spelare 2(Gul) tur");
+                System.out.println("Spelare 2(Gul) tur ");
             }
 
             System.out.println("Välj en kolumn som du vill lägga ditt mynt i.");
