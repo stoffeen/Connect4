@@ -34,11 +34,12 @@ public class Testing {
     }
     // kolla så att man vinner ifall man har 4 i rad diagonalt
     @Test
-    public void testHorizontalWin(){
+    public void testDiagonalWin() {
         Board board = new Board();
-        for(int i = 1; i <= 4; i++) {
+        for (int i = 1; i <= 4; i++) {
             board.addPiece(i, "R");
         }
-        assertTrue(board.checkForWinner(1,"R"));
+        assertTrue(board.checkForWinner(1, "R"));
+    }
     // kolla så att det blir rätt spelares tur
 }
