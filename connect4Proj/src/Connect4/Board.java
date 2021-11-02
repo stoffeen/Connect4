@@ -11,7 +11,7 @@ public class Board {
         return columns;
     }
 
-    private boolean checkDiagonal(int row, int col, String winningColor, boolean rightDiagonal) {
+    public boolean checkDiagonal(int row, int col, String winningColor, boolean rightDiagonal) {
         int winningStreak = 4;
         int reverser = 1;
 
@@ -26,7 +26,7 @@ public class Board {
                 if(winRow < 0 || winCol >= columns) continue;
                 if(winRow >= rows  || winCol < 0) break;
             }
-            if(ourBoard[winRow][winCol] != null && ourBoard[winRow][winCol].getColor().equals(winningColor)) {
+            if(ourBoard[winRow][winCol] != null && ourBoard[winRow][winCol].getTokenColor().equals(winningColor)) {
                 if (--winningStreak == 0) return true;
             } else winningStreak = 4;
         }
@@ -41,7 +41,7 @@ public class Board {
 
                 // check downwards
                 for(int winRow = row + 1; winRow < rows; winRow++) {
-                    if(ourBoard[winRow][col].getColor().equals(winningColor)) {
+                    if(ourBoard[winRow][col].getTokenColor().equals(winningColor)) {
                         winningStreak--;
                         if(winningStreak == 0) return true;
                     } else winningStreak = 3;
@@ -53,16 +53,19 @@ public class Board {
                     if(winCol < 0) continue;
                     if(winCol >= columns) break;
 
-                    if(ourBoard[row][winCol] != null && ourBoard[row][winCol].getColor().equals(winningColor)) {
+                    if(ourBoard[row][winCol] != null && ourBoard[row][winCol].getTokenColor().equals(winningColor)) {
                         winningStreak--;
                         if(winningStreak == 0) return true;
                     } else winningStreak = 4;
                 }
 
                 // check left diagonal
-                if(checkDiagonal(row, col, winningColor, false)) return true;
+
+                if(checkDiagonal(row, col, winningColor, false))
+                    return true;
                 // check right diagonal
-                if(checkDiagonal(row, col, winningColor, true)) return true;
+                if(checkDiagonal(row, col, winningColor, true))
+                    return true;
 
                 return false;
             }
@@ -79,7 +82,7 @@ public class Board {
                 for(int row = rows - 1; row >= 0; row--)
                     if(ourBoard[row][colToAdd] == null) {
                         ourBoard[row][colToAdd] = new Piece();
-                        ourBoard[row][colToAdd].setColor(color);
+                        ourBoard[row][colToAdd].setTokenColor(color);
                         addedThePiece = true;
                         break;
                     }
@@ -104,7 +107,7 @@ public class Board {
             System.out.print("|");
             for(int col = 0; col < columns; col++) {
                 if (ourBoard[row][col] == null) System.out.print("_");
-                else System.out.print(ourBoard[row][col].getColor());
+                else System.out.print(ourBoard[row][col].getTokenColor());
                 System.out.print("|");
             }
             System.out.println();

@@ -1,13 +1,13 @@
 package Connect4;
 
 public class Piece {
-    private String color;
+    private String tokenColor;
 
-    public String getColor() {
-        return color;
+    public String getTokenColor() {
+        return tokenColor;
     }
 
-    public void setColor(String color) {
-        this.color = color;
+    public void setTokenColor(String tokenColor) {
+        this.tokenColor = tokenColor;
     }
 }

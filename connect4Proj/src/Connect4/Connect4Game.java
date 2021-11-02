@@ -5,8 +5,8 @@ import java.util.Scanner;
 
 public class Connect4Game {
     private Board board;
-    private String color1;
-    private String color2;
+    private String colorRed;
+    private String colorYellow;
 
     // true if player1's turn
     // false if player2's turn
@@ -15,8 +15,8 @@ public class Connect4Game {
     // color for the players
     public Connect4Game(String color1, String color2) {
         board = new Board();
-        this.color1 = color1;
-        this.color2 = color2;
+        this.colorRed = color1;
+        this.colorYellow = color2;
 
         is1Playing = (new Random()).nextBoolean();
     }
@@ -25,9 +25,9 @@ public class Connect4Game {
         String winningColor;
 
         if(is1Playing) {
-            winningColor = color1;
+            winningColor = colorRed;
         } else {
-            winningColor = color2;
+            winningColor = colorYellow;
         }
 
         return board.checkForWinner(column, winningColor);
@@ -46,10 +46,10 @@ public class Connect4Game {
             board.printBoard();
             String color;
             if(is1Playing) {
-                color = color1;
+                color = colorRed;
                 System.out.println("Spelare 1(Röd) tur ");
             } else {
-                color = color2;
+                color = colorYellow;
                 System.out.println("Spelare 2(Gul) tur ");
             }
 
