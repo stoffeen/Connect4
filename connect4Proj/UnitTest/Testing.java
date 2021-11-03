@@ -14,32 +14,51 @@ public class Testing {
         assertTrue(board.addPiece(1, "R"));
         assertFalse(board.addPiece(8, "G"));
     }
-    // kolla så att man vinner ifall man har 4 i rad vertikalt
+
+    // Check for win vertical
     @Test
-    public void testVerticalWin(){
+    public void testVerticalWin() {
         Board board = new Board();
-        for(int i = 0; i < 4; i++) {
+        for (int i = 0; i < 4; i++) {
             board.addPiece(1, "R");
         }
-        assertTrue(board.checkForWinner(1,"R"));
+        assertTrue(board.checkForWinner(1, "R"));
     }
-    // kolla så att man vinner ifall man har 4 i rad horisontelt
+
+    // Check for win horizontal
     @Test
-    public void testHorizontalWin(){
-        Board board = new Board();
-        for(int i = 1; i <= 4; i++) {
-            board.addPiece(i, "R");
-        }
-        assertTrue(board.checkForWinner(1,"R"));
-    }
-    // kolla så att man vinner ifall man har 4 i rad diagonalt
-    @Test
-    public void testDiagonalWin() {
+    public void testHorizontalWin() {
         Board board = new Board();
         for (int i = 1; i <= 4; i++) {
             board.addPiece(i, "R");
         }
         assertTrue(board.checkForWinner(1, "R"));
     }
-    // kolla så att det blir rätt spelares tur
+
+    // Check for win diagonal
+    @Test
+    public void testDiagonalWin() {
+        Board board = new Board();
+        for (int j = 4; j >= 1; j--) {       // start at col 4 and goes down to 1
+            for (int k = 1; k < j; k++) {    // start at 0 and goes up to j
+                board.addPiece(j, "G");    // adding yellow pieces
+            }
+        }
+        for (int i = 1; i <= 4; i++) {
+            board.addPiece(i, "R");
+        }
+        assertTrue(board.checkForWinner(1, "R"));
+    }
+
+    // Checks so that you don't win if there's a gap
+    @Test
+    public void testGapNoWin() {
+        Board board = new Board();
+        for (int i = 1; i <= 5; i++){
+            if (i != 4) {
+                board.addPiece(i,"G");
+            }
+        }
+        assertFalse(board.checkForWinner(5, "G"));
+    }
 }
