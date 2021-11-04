@@ -8,8 +8,8 @@ public class Connect4Game {
     private String colorRed;
     private String colorYellow;
 
-    // true if player1's turn
-    // false if player2's turn
+    // true if it's player1's turn
+    // false if it's player2's turn
     private boolean is1Playing;
 
     // color for the players
@@ -70,6 +70,7 @@ public class Connect4Game {
                     } else {
                         System.out.println("Spelare 2 (Gul) vann!");
                     }
+
                     // Reset, asking if you want to play again
                     System.out.println("Vill du spela igen?");
                     System.out.println("Tryck J för Ja, N för Nej: ");

@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class Testing {
 
-    // kolla så att man bara kan skriva in 1-7
+    // Check so that you only can type in 1-7
     @Test
     public void testNumbersYouCanType() {
         Board board = new Board();
@@ -50,7 +50,7 @@ public class Testing {
         assertTrue(board.checkForWinner(1, "R"));
     }
 
-    // Checks so that you don't win if there's a gap
+    // Check so that you don't win if there's a gap
     @Test
     public void testGapNoWin() {
         Board board = new Board();

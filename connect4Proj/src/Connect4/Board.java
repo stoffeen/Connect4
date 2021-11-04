@@ -36,6 +36,7 @@ public class Board {
     public boolean checkForWinner(int col, String winningColor) {
         for(int row = 0; row < rows; row++) {
             if(ourBoard[row][col] != null) {
+
                 // if this reaches 0, we have won
                 int winningStreak = 3;
 
@@ -46,8 +47,8 @@ public class Board {
                         if(winningStreak == 0) return true;
                     } else winningStreak = 3;
                 }
-
                 winningStreak = 4;
+
                 // look at the horizontal
                 for(int winCol = col - 3; winCol <= col + 3; winCol++) {
                     if(winCol < 0) continue;
@@ -60,14 +61,10 @@ public class Board {
                 }
 
                 // check left diagonal
-
                 if(checkDiagonal(row, col, winningColor, false))
                     return true;
                 // check right diagonal
-                if(checkDiagonal(row, col, winningColor, true))
-                    return true;
-
-                return false;
+                return checkDiagonal(row, col, winningColor, true);
             }
         }
         return false;
